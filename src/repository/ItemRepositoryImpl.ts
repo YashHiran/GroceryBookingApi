@@ -1,10 +1,8 @@
 import query from "../utils/DBQuery";
 import { Item } from "../models/Item";
 import { ItemRepository } from "./ItemRepository";
-import fs = require('fs');
 import { pool } from "../utils/DBconfig";
 import { ItemQueries } from '../sql/SqlQueries';
-
 
 export class ItemRepositoryImpl implements ItemRepository {
 

@@ -12,3 +12,8 @@ export enum ItemQueries {
     UPDATE_ITEM_BY_ID = `UPDATE items SET name = $1, price = $2, quantity = $3 WHERE id = $4;`,
     UPDATE_ITEM_DECREASE_INVENTORY = `UPDATE items SET quantity = quantity - $1 WHERE id = $2`
 }
+
+export enum OrderQueries {
+    INSERT_INTO_ITEMS = 'INSERT INTO orders (user_id, items, total_price) VALUES ($1, $2, $3) RETURNING *',
+    GET_ALL_ORDERS = 'SELECT * FROM orders WHERE user_id = $1;'
+}

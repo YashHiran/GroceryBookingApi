@@ -1,31 +1,13 @@
 import express = require('express');
-const itemRouter = express.Router()
+const itemsRouter = express.Router()
 import { ItemRepositoryImpl } from "../repository/ItemRepositoryImpl";
 import { Item } from '../models/Item';
-import { UserService } from '../service/UserService';
-import { UserRepositoryImpl } from '../repository/UserRepositoryImpl';
 import { ItemService } from '../service/ItemService';
-import { Role } from '../utils/Role';
-import { User } from 'src/models/User';
+import { isUserExists, isUserAuthenticated } from '../utils/util';
 
-const itemRepository = new ItemRepositoryImpl();
-const itemService = new ItemService(itemRepository);
+const itemService = new ItemService(new ItemRepositoryImpl());
 
-const userRepository = new UserRepositoryImpl();
-const userService = new UserService(userRepository);
-
-const isUserExists = async(userId: number) => {
-  const user: User = await userService.getUserById(userId);
-  return !!user;
-} 
-
-const isUserAuthenticated = async(userId: number) => {
-  const user: User = await userService.getUserById(userId);
-  if(user.role == Role.Admin) return true;
-  return false;
-} 
-
-itemRouter.get('/users/:id/items', async (req, res) => {
+itemsRouter.get('/users/:id/items', async (req, res) => {
   const userId = parseInt(req.params.id); 
   try {
     if(! await isUserExists(userId)) {
@@ -40,7 +22,7 @@ itemRouter.get('/users/:id/items', async (req, res) => {
   }
 });
 
-itemRouter.get('/users/:id/items/:itemId', async (req, res) => {
+itemsRouter.get('/users/:id/items/:itemId', async (req, res) => {
   const userId = parseInt(req.params.id); 
   const itemId = parseInt(req.params.itemId); 
   try {
@@ -60,7 +42,7 @@ itemRouter.get('/users/:id/items/:itemId', async (req, res) => {
   }
 });
 
-itemRouter.post('/users/:id/items', async (req, res) => {
+itemsRouter.post('/users/:id/items', async (req, res) => {
   const userId = parseInt(req.params.id); 
   try {
     if(! await isUserExists(userId)) {
@@ -80,7 +62,7 @@ itemRouter.post('/users/:id/items', async (req, res) => {
   }
 });
 
-itemRouter.put('/users/:id/items/:itemId', async (req, res) => {
+itemsRouter.put('/users/:id/items/:itemId', async (req, res) => {
   const userId = parseInt(req.params.id); 
   const itemId = parseInt(req.params.itemId);
   try {
@@ -101,7 +83,7 @@ itemRouter.put('/users/:id/items/:itemId', async (req, res) => {
   }
 });
 
-itemRouter.delete('/users/:id/items/:itemId', async (req, res) => {
+itemsRouter.delete('/users/:id/items/:itemId', async (req, res) => {
   const userId = parseInt(req.params.id); 
   const itemId = parseInt(req.params.itemId);
   try {
@@ -121,4 +103,4 @@ itemRouter.delete('/users/:id/items/:itemId', async (req, res) => {
   }
 });
 
-export default itemRouter;
+export default itemsRouter;

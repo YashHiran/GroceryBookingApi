@@ -13,3 +13,11 @@ CREATE TABLE IF NOT EXISTS items (
     price DECIMAL(10, 2) NOT NULL,
     quantity INT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS orders (
+  id SERIAL PRIMARY KEY,
+  user_id INT NOT NULL,
+  total_price DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+  items JSONB NOT NULL DEFAULT '[]', 
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
