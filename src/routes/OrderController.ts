@@ -1,6 +1,6 @@
 import express = require('express');
 import { OrderService } from '../service/OrderService';
-import { isUserExists } from '../utils/util';
+import { isUserExists } from '../service/userOperations';
 import { OrderRepositoryImpl } from '../repository/OrderRepositoryImpl';
 const ordersRouter = express.Router()
 

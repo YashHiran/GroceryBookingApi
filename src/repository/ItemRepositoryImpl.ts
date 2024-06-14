@@ -1,7 +1,7 @@
-import query from "../utils/DBQuery";
+import query from "./utils/DBQuery";
 import { Item } from "../models/Item";
 import { ItemRepository } from "./ItemRepository";
-import { pool } from "../utils/DBconfig";
+import { pool } from "./utils/DBconfig";
 import { ItemQueries } from '../sql/SqlQueries';
 
 export class ItemRepositoryImpl implements ItemRepository {

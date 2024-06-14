@@ -1,6 +1,6 @@
-import { pool } from '../utils/DBconfig';
+import { pool } from './utils/DBconfig';
 import { User } from '../models/User';
-import query from '../utils/DBQuery';
+import query from './utils/DBQuery';
 import { UserRepository } from './UserRepository';
 import { UserQueries } from '../sql/SqlQueries';
 

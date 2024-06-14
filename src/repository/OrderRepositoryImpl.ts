@@ -1,10 +1,10 @@
 import { OrdersRepository } from './OrderRepository';
 import { Order } from '../models/Order';
-import { pool } from '../utils/DBconfig';
+import { pool } from './utils/DBconfig';
 import { OrderQueries } from '../sql/SqlQueries';
 import { ItemRepositoryImpl } from './ItemRepositoryImpl';
 import { PoolClient } from 'pg';
-import query from '../utils/DBQuery';
+import query from './utils/DBQuery';
 
 export class OrderRepositoryImpl implements OrdersRepository {
 

@@ -1,6 +1,6 @@
 import { User } from '../models/User';
-import { Role } from './Role';
-import { UserService } from '../service/UserService';
+import { Role } from '../models/Role';
+import { UserService } from './UserService';
 import { UserRepositoryImpl } from '../repository/UserRepositoryImpl';
 
 const userService = new UserService(new UserRepositoryImpl());

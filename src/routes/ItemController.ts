@@ -3,7 +3,7 @@ const itemsRouter = express.Router()
 import { ItemRepositoryImpl } from "../repository/ItemRepositoryImpl";
 import { Item } from '../models/Item';
 import { ItemService } from '../service/ItemService';
-import { isUserExists, isUserAuthenticated } from '../utils/util';
+import { isUserExists, isUserAuthenticated } from '../service/userOperations';
 
 const itemService = new ItemService(new ItemRepositoryImpl());
 
