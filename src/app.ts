@@ -5,7 +5,7 @@ import ItemController from './routes/ItemController';
 import OrderController from './routes/OrderController';
 
 const app = express();
-  
+
 app.use(bodyParser.json());
 app.use(express.static('public'));
 

@@ -14,7 +14,7 @@ export class ItemRepositoryImpl implements ItemRepository {
       await client.query(ItemQueries.INSERT_INTO_ITEMS, params);
     } catch (error) {
       console.error('Error adding item:', error);
-      throw error; 
+      throw error;
     } finally {
       client.release();
     }
@@ -24,19 +24,19 @@ export class ItemRepositoryImpl implements ItemRepository {
     try {
       const params = [itemId];
       const [rows] = await query<Item>(ItemQueries.GET_ITEM_BY_ID, params);
-      if(!rows) {
+      if (!rows) {
         throw new ItemNotFoundException(`Item with ID ${itemId} not found`);
       }
-      return rows; 
-    } catch(error) {
+      return rows;
+    } catch (error) {
       throw error;
     }
   }
 
   async getItems(): Promise<Item[]> {
-    try{
+    try {
       return await query<Item>(ItemQueries.GET_ALL_ITEMS);
-    } catch(error) {
+    } catch (error) {
       throw error;
     }
   }
@@ -45,26 +45,26 @@ export class ItemRepositoryImpl implements ItemRepository {
     try {
       const params = [itemId];
       await query(ItemQueries.REMOVE_ITEM_BY_ID, params);
-    } catch(error) {
+    } catch (error) {
       throw error;
     }
-    
+
   }
 
   async updateItem(itemId: number, updatedItem: Item): Promise<void> {
     try {
-      const params = [updatedItem.name, updatedItem.price,updatedItem.quantity, itemId];
+      const params = [updatedItem.name, updatedItem.price, updatedItem.quantity, itemId];
       await query(ItemQueries.UPDATE_ITEM_BY_ID, params);
-    } catch(error) {
+    } catch (error) {
       throw error;
     }
-   
+
   }
 
   async decreaseInventory(itemId: number, quantity: number): Promise<void> {
     try {
-      await query(ItemQueries.UPDATE_ITEM_DECREASE_INVENTORY, [quantity, itemId]);  
-    } catch(error) {
+      await query(ItemQueries.UPDATE_ITEM_DECREASE_INVENTORY, [quantity, itemId]);
+    } catch (error) {
       throw error;
     }
   }

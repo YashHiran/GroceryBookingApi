@@ -8,34 +8,34 @@ import query from './utils/DBQuery';
 
 export class OrderRepositoryImpl implements OrdersRepository {
 
-async createOrder(order: Order, userId: number): Promise<Order> {
-  const client = await pool.connect();
+  async createOrder(order: Order, userId: number): Promise<Order> {
+    const client = await pool.connect();
 
-  try {
-    await client.query('BEGIN');
+    try {
+      await client.query('BEGIN');
 
-    const createdOrder = await this.addOrder(order, userId, client);
-    await this.updateInventory(order);
+      const createdOrder = await this.addOrder(order, userId, client);
+      await this.updateInventory(order);
 
-    await client.query('COMMIT');
+      await client.query('COMMIT');
 
-    return createdOrder; 
-  } catch (error) {
-    console.error('Error creating order:', error);
-    await client.query('ROLLBACK');
-    throw error;
-  } finally {
-    client.release();
+      return createdOrder;
+    } catch (error) {
+      console.error('Error creating order:', error);
+      await client.query('ROLLBACK');
+      throw error;
+    } finally {
+      client.release();
+    }
   }
-}
 
-async getOrderByUserId(userId: number): Promise<Order[]> {
-  try {
-    return await query<Order>(OrderQueries.GET_ALL_ORDERS, [userId]);
-  } catch(error) {
-    throw error;
+  async getOrderByUserId(userId: number): Promise<Order[]> {
+    try {
+      return await query<Order>(OrderQueries.GET_ALL_ORDERS, [userId]);
+    } catch (error) {
+      throw error;
+    }
   }
-}
 
   private async updateInventory(order: Order) {
     const itemRepository = new ItemRepositoryImpl();
@@ -43,7 +43,7 @@ async getOrderByUserId(userId: number): Promise<Order[]> {
       for (const item of order.items) {
         await itemRepository.decreaseInventory(item.itemId, item.quantity);
       }
-    } catch(error) {
+    } catch (error) {
       throw error;
     }
   }
