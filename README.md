@@ -4,15 +4,20 @@
 
 1. Install dependencies:
     ```bash
+    docker-compose up -d
+    ```
+
+2. Install dependencies:
+    ```bash
     npm install
     ```
 
-2. Build the project:
+4. Build the project:
     ```bash
     npm run build 
     ```
 
-3. Start the server:
+4. Start the server:
     ```bash
     npm run start
     ```
