@@ -1,0 +1,14 @@
+node_modules/
+npm-debug.log
+dist/
+build/
+package-lock.json
+yarn.lock
+.idea/
+.vscode/
+.sublime-project
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+.git/
