@@ -2,26 +2,8 @@
 
 ### Setup
 
-1. Install dependencies:
+1. Run application:
     ```bash
     docker-compose up -d
     ```
-
-2. Install dependencies:
-    ```bash
-    npm install
-    ```
-
-4. Build the project:
-    ```bash
-    npm run build 
-    ```
-
-4. Start the server:
-    ```bash
-    npm run start
-    ```
-
-### Usage
-
-- Access the API endpoints to manage grocery shopping lists and items.
+2. Import and use the `postman_collection.json` to create user, add items and place order.

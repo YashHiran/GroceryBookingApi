@@ -5,9 +5,6 @@ Roles:
 - Admin
 - User
 
-### Mandatory Requirements:
-If you have applied for Fullstack Node position, please use typescript.
-
 ### Design API endpoints
 
 1. Admin Responsibilities:
