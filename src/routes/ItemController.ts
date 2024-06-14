@@ -4,6 +4,7 @@ import { ItemRepositoryImpl } from "../repository/ItemRepositoryImpl";
 import { Item } from '../models/Item';
 import { ItemService } from '../service/ItemService';
 import { isUserExists, isUserAuthenticated } from '../service/userOperations';
+import { ItemNotFoundException } from '../Utils/CustomExceptions/ItemNotFoundException';
 
 const itemService = new ItemService(new ItemRepositoryImpl());
 
@@ -37,6 +38,11 @@ itemsRouter.get('/users/:id/items/:itemId', async (req, res) => {
       res.status(404).json({ message: 'Item not found' });
     }
   } catch (error) {
+
+    if (error instanceof ItemNotFoundException) {
+      res.status(404).json({ message: error.message });
+    } 
+
     console.error('Error while getting item with id ', itemId,  error);
     res.status(500).json({ message: 'Error retrieving item' });
   }

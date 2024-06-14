@@ -3,6 +3,7 @@ const userRouter = express.Router()
 import { UserRepositoryImpl } from '../repository/UserRepositoryImpl';
 import { UserService } from '../service/UserService';
 import { User } from '../models/User';
+import { UserNotFoundException } from '../Utils/CustomExceptions/UserNotFoundException';
 
 const userRepository = new UserRepositoryImpl();
 const userService = new UserService(userRepository);
@@ -17,6 +18,9 @@ userRouter.get('/:id', async (req, res) => {
       res.status(404).json({ message: 'User not found' });
     }
   } catch (error) {
+    if (error instanceof UserNotFoundException) {
+      res.status(404).json({ message: error.message });
+    } 
     console.error('Error getting user with id' , id, error);
     res.status(500).json({ message: 'Error retrieving user' });
   }

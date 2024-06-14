@@ -3,6 +3,7 @@ import { Item } from "../models/Item";
 import { ItemRepository } from "./ItemRepository";
 import { pool } from "./utils/DBconfig";
 import { ItemQueries } from '../sql/SqlQueries';
+import { ItemNotFoundException } from "../Utils/CustomExceptions/ItemNotFoundException";
 
 export class ItemRepositoryImpl implements ItemRepository {
 
@@ -24,7 +25,7 @@ export class ItemRepositoryImpl implements ItemRepository {
       const params = [itemId];
       const [rows] = await query<Item>(ItemQueries.GET_ITEM_BY_ID, params);
       if(!rows) {
-        throw new Error('Item not found');
+        throw new ItemNotFoundException(`Item with ID ${itemId} not found`);
       }
       return rows; 
     } catch(error) {

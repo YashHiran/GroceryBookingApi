@@ -3,6 +3,7 @@ import { User } from '../models/User';
 import query from './utils/DBQuery';
 import { UserRepository } from './UserRepository';
 import { UserQueries } from '../sql/SqlQueries';
+import { UserNotFoundException } from '../Utils/CustomExceptions/UserNotFoundException';
 
 export class UserRepositoryImpl implements UserRepository {
   
@@ -22,7 +23,7 @@ export class UserRepositoryImpl implements UserRepository {
     try {
       const [rows] = await query<User>(UserQueries.GET_USER_BY_ID, [id]);
       if(!rows) {
-        throw new Error('User not found');
+        throw new UserNotFoundException(`User with ID ${id} not found`);
       }
       return rows;
     } catch(error) {
